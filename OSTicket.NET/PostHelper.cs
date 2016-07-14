@@ -13,7 +13,6 @@ namespace OSTicket.NET {
             string apiURL = url + "/api/validate.php";
             var request = (HttpWebRequest)WebRequest.Create(apiURL);
             request.Method = "POST";
-            request.ContentType = "application/json";
             request.Headers.Add("X-API-KEY", apiKey);
             var response = (HttpWebResponse)request.GetResponse();
             return new StreamReader(response.GetResponseStream()).ReadToEnd();
