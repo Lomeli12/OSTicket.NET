@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OSTicket.NET", "OSTicket.NET\OSTicket.NET.csproj", "{D5DDF51D-C6BD-4766-831D-63ADF292A940}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OSTicket.NET_Test", "OSTicket.NET_Test\OSTicket.NET_Test.csproj", "{8D437A6D-FD96-4A16-830D-39EEDDDE2670}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8D437A6D-FD96-4A16-830D-39EEDDDE2670}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D437A6D-FD96-4A16-830D-39EEDDDE2670}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D437A6D-FD96-4A16-830D-39EEDDDE2670}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D437A6D-FD96-4A16-830D-39EEDDDE2670}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5DDF51D-C6BD-4766-831D-63ADF292A940}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5DDF51D-C6BD-4766-831D-63ADF292A940}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5DDF51D-C6BD-4766-831D-63ADF292A940}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5DDF51D-C6BD-4766-831D-63ADF292A940}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
