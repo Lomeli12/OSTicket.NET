@@ -9,8 +9,17 @@ namespace OSTicket.NET {
         private PostHelper(){
         }
 
+        public static string postKey(string url, string apiKey) {
+            string apiURL = url + "/api/validate.php";
+            var request = (HttpWebRequest)WebRequest.Create(apiURL);
+            request.Method = "POST";
+            request.ContentType = "application/json";
+            request.Headers.Add("X-API-KEY", apiKey);
+            var response = (HttpWebResponse)request.GetResponse();
+            return new StreamReader(response.GetResponseStream()).ReadToEnd();
+        }
+            
         public static string postOSTicketJson(string url, TicketInfo ticket, string apiKey, bool useHTTP) {
-            string value;
             string apiURL = url + (useHTTP ? "/api/http.php/tickets.json" : "/api/tickets.json");
             var request = (HttpWebRequest)WebRequest.Create(apiURL);
             request.Method = "POST";
@@ -21,10 +30,8 @@ namespace OSTicket.NET {
                 stream.Flush();
                 stream.Close();
             }
-            Console.WriteLine(apiURL);
             var response = (HttpWebResponse)request.GetResponse();
-            value = new StreamReader(response.GetResponseStream()).ReadToEnd();
-            return value;
+            return new StreamReader(response.GetResponseStream()).ReadToEnd();
         }
 
         public static string getPublicIP() {
