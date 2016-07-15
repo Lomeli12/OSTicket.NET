@@ -36,6 +36,10 @@ namespace OSTicket.NET {
             return submitTicket(ticket, !HTTPS);
         }
 
+        public string getTicket(int id) {
+            return PostHelper.postGetTicket(URL, API_KEY, id);
+        }
+
         public bool HTTPS {
             get {
                 return _https;

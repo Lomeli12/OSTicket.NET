@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace OSTicket.NET {
     public class TicketInfo {
@@ -11,31 +12,36 @@ namespace OSTicket.NET {
             this._message = message;
         }
 
-        public string name {
+        [JsonProperty(PropertyName = "name", Required = Required.Always)]
+        public string NAME {
             get { 
                 return _name;
             }
         }
 
-        public string email {
+        [JsonProperty(PropertyName = "email", Required = Required.Always)]
+        public string EMAIL {
             get {
                 return this._email;
             }
         }
 
-        public string phone {
+        [JsonProperty(PropertyName = "phone", NullValueHandling = NullValueHandling.Ignore)]
+        public string PHONE {
             get {
                 return this._phone;
             }
         }
 
-        public string subject {
+        [JsonProperty(PropertyName = "subject", Required = Required.Always)]
+        public string SUBJECT {
             get {
                 return this._subject;
             }
         }
 
-        public string message {
+        [JsonProperty(PropertyName = "message", Required = Required.Always)]
+        public string MESSAGE {
             get {
                 return this._message;
             }
