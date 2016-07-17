@@ -3,47 +3,66 @@ using Newtonsoft.Json;
 
 namespace OSTicket.NET {
     public class TicketInfo {
-        private string _name, _email, _phone, _subject, _message;
-        public TicketInfo(string name, string email, string phone, string subject, string message) {
-            this._name = name;
-            this._email = email;
-            this._phone = phone;
-            this._subject = subject;
-            this._message = message;
+        private string _id, _number, _status_id, _subject, _overdue, _create_date, _url;
+
+        public TicketInfo() {
+            _id = "0";
+            _number = "0";
+            _status_id = "0";
+            _subject = "";
+            _overdue = "0";
+            _create_date = "";
+            _url = "#";
         }
 
-        [JsonProperty(PropertyName = "name", Required = Required.Always)]
-        public string NAME {
-            get { 
-                return _name;
+        [JsonProperty(PropertyName = "id", Required = Required.Always)]
+        public string ID {
+            get {
+                return _id;
             }
         }
 
-        [JsonProperty(PropertyName = "email", Required = Required.Always)]
-        public string EMAIL {
+        [JsonProperty(PropertyName = "number", Required = Required.Always)]
+        public string Number {
             get {
-                return this._email;
+                return _number;
             }
         }
 
-        [JsonProperty(PropertyName = "phone", NullValueHandling = NullValueHandling.Ignore)]
-        public string PHONE {
+        [JsonProperty(PropertyName = "status_id", Required = Required.Always)]
+        public string Status_ID {
             get {
-                return this._phone;
+                return _status_id;
             }
         }
 
         [JsonProperty(PropertyName = "subject", Required = Required.Always)]
-        public string SUBJECT {
+        public string Subject {
             get {
-                return this._subject;
+                return _subject;
             }
         }
 
-        [JsonProperty(PropertyName = "message", Required = Required.Always)]
-        public string MESSAGE {
+        [JsonProperty(PropertyName = "overdue", Required = Required.Always)]
+        public string Overdue {
             get {
-                return this._message;
+                return _overdue;
+            }
+        }
+
+        [JsonProperty(PropertyName = "create_date", Required = Required.Always)]
+        public string Creation_Date {
+            get {
+                return _create_date;
+            }
+        }
+
+        public string URL {
+            get {
+                return _url;
+            }
+            set {
+                _url = value;
             }
         }
     }

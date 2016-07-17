@@ -1,6 +1,7 @@
 <?php
 @chdir(dirname(__FILE__).'/'); //Change dir.
 require('api.inc.php');
+require('TicketHelper.php');
 /*
  * Returns ticket in JSON format. Requester should handle parsing it themselves
  * Ticket Status goes from 1 = Open, 2 = Resolved (and closed), and 3 = Closed
@@ -13,14 +14,11 @@ if (isset($_GET["id"])) {
         echo "Invalid id";
         exit;
     }
-    $ticket = new Ticket($id);
-    $id = $ticket->getIdByNumber($id);
-	$ticket->load($id);
+    $ticket = TicketHelper::getTicketInfo($id);
     if ($ticket)
         echo json_encode($ticket);
     else
         echo "Something went wrong, help!";
-} else {
+} else
     echo "Missing ticket id";
-}
 ?>

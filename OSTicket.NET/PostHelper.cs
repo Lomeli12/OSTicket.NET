@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace OSTicket.NET {
     public class PostHelper {
-        private PostHelper(){
+        private PostHelper() {
         }
 
         public static string postKey(string url, string apiKey) {
@@ -15,8 +15,8 @@ namespace OSTicket.NET {
             var response = (HttpWebResponse)request.GetResponse();
             return new StreamReader(response.GetResponseStream()).ReadToEnd();
         }
-            
-        public static string postOSTicketJson(string url, TicketInfo ticket, string apiKey, bool useHTTP) {
+
+        public static string postOSTicketJson(string url, Ticket ticket, string apiKey, bool useHTTP) {
             string apiURL = url + (useHTTP ? "/api/http.php/tickets.json" : "/api/tickets.json");
             var request = setupPostRequest(apiURL, apiKey);
             request.ContentType = "application/json";
@@ -29,11 +29,16 @@ namespace OSTicket.NET {
             return new StreamReader(response.GetResponseStream()).ReadToEnd();
         }
 
-        public static string postGetTicket(string url, string apiKey, int id) {
+        public static TicketInfo postGetTicketInfo(string url, string apiKey, int id) {
+            var ticket_info = new TicketInfo();
             string apiURL = url + "/api/listtickets.php?id=" + id;
             var request = setupPostRequest(apiURL, apiKey);
             var response = (HttpWebResponse)request.GetResponse();
-            return new StreamReader(response.GetResponseStream()).ReadToEnd();
+            var json_response = new StreamReader(response.GetResponseStream()).ReadToEnd();
+            Console.WriteLine(json_response);
+            ticket_info = JsonConvert.DeserializeObject<TicketInfo>(json_response);
+            if (ticket_info != null) ticket_info.URL = url + "tickets.php?id=" + ticket_info.ID;
+            return ticket_info;
         }
 
         private static HttpWebRequest setupPostRequest(string url, string apiKey) {
@@ -45,8 +50,7 @@ namespace OSTicket.NET {
 
         public static string getPublicIP() {
             var ip = new WebClient().DownloadString("http://icanhazip.com/");
-            if (ip.EndsWith("\n"))
-                ip = ip.Substring(0, ip.Length - "\n".Length);
+            if (ip.EndsWith("\n")) ip = ip.Substring(0, ip.Length - "\n".Length);
             return ip;
         }
     }
