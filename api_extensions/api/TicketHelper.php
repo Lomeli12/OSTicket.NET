@@ -3,6 +3,10 @@ class TicketHelper{
     // Simple function to help get Tickets
     // Made it as it's own class as it'll probably be useful in
     // the future.
+
+    // Gets ticket ID via a ticket number. Necessary and stupid
+    // because OSTicket gives tickets an ID AND a number that has
+    // no relation to the ID.
     static function getTicketByNumber($number, $email=null) {
         if (is_null($number) || !ctype_digit($number))
             return null;
@@ -12,6 +16,8 @@ class TicketHelper{
         return $ticket;
     }
 
+    // Get's a ticket by its number and only get the parts
+    // we need as a TicketInfo object
     static function getTicketInfo($number, $email=null) {
         $ticket = self::getTicketByNumber($number, $email);
         if (is_null($ticket))
@@ -23,6 +29,7 @@ class TicketHelper{
 
 }
 
+// Just fields with the information needed, nothing special
 class TicketInfo {
     var $id;
     var $number;

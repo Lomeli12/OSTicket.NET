@@ -8,17 +8,21 @@ require('TicketHelper.php');
  */
 $controller = new ApiController();
 $controller->requireApiKey();
+
+// Gets id from url (example : listtickets.php?id=IDHERE
 if (isset($_GET["id"])) {
     $id = $_GET["id"];
+    // Check if it's an integer. Exit out if it isn't
     if (!ctype_digit($id)) {
         echo "Invalid id";
         exit;
     }
+    // Attempt to get ticket info and output it as JSON.
     $ticket = TicketHelper::getTicketInfo($id);
     if ($ticket)
         echo json_encode($ticket);
     else
-        echo "Something went wrong, help!";
+        echo "Could not find ticket with id ".$id;
 } else
     echo "Missing ticket id";
 ?>
