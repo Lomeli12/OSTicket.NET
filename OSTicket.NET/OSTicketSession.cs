@@ -29,8 +29,7 @@ namespace OSTicket.NET {
         /// <param name="ticket">Ticket.</param>
         /// <param name="useHTTP">If set to <c>true</c> use /api/http.php/tickets.json instead of /api/tickets.json. Should be used if server does NOT have a SSL Certificate.</param>
         public string submitTicket(Ticket ticket, bool useHTTP) {
-            if (!KEY_VALID) return null;
-            if (ticket == null) return null;
+            if (!KEY_VALID || ticket == null) return null;
             return PostHelper.postOSTicketJson(URL, ticket, API_KEY, useHTTP);
         }
 
@@ -39,6 +38,7 @@ namespace OSTicket.NET {
         }
 
         public TicketInfo getTicketInfo(int id) {
+            if (!KEY_VALID) return null;
             return PostHelper.postGetTicketInfo(URL, API_KEY, id);
         }
 
