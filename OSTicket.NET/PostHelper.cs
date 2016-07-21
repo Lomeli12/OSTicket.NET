@@ -16,7 +16,7 @@ namespace OSTicket.NET {
             return new StreamReader(response.GetResponseStream()).ReadToEnd();
         }
 
-        public static string postOSTicketJson(string url, Ticket ticket, string apiKey, bool useHTTP) {
+        public static string postSubmitTicket(string url, Ticket ticket, string apiKey, bool useHTTP) {
             string apiURL = url + (useHTTP ? "/api/http.php/tickets.json" : "/api/tickets.json");
             var request = setupPostRequest(apiURL, apiKey);
             request.ContentType = "application/json";
