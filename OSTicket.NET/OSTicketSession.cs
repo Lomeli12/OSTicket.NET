@@ -5,6 +5,12 @@ namespace OSTicket.NET {
         private string _url, _apikey;
         private bool _https, _valid_key;
 
+        /// <summary>
+        /// Creates a new session with OSTicket and validates key. If key is invalid,
+        /// all functions will auto return null values.
+        /// </summary>
+        /// <param name="url">URL.</param>
+        /// <param name="apikey">Apikey.</param>
         public OSTicketSession(string url, string apikey) {
             this._apikey = apikey;
             if (url.EndsWith("/", StringComparison.Ordinal)) url = url.Substring(0, url.Length - 1);
@@ -47,9 +53,14 @@ namespace OSTicket.NET {
             return PostHelper.postGetTicketInfo(URL, API_KEY, id);
         }
 
+        /// <summary>
+        /// Use HTTPS when making submit ticket requests
+        /// </summary>
         public bool HTTPS {
             get {
                 return _https;
+            } set {
+                _https = value;
             }
         }
 
@@ -65,6 +76,9 @@ namespace OSTicket.NET {
             }
         }
 
+        /// <summary>
+        /// Is the API key is valid
+        /// </summary>
         public bool KEY_VALID {
             get {
                 return _valid_key;
