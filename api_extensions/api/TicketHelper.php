@@ -16,7 +16,7 @@ class TicketHelper{
         $ticket = self::getTicketByNumber($number, $email);
         if (is_null($ticket))
             return null;
-        return new TicketInfo($ticket->getId(), $ticket->getNumber(), $ticket->getStatusId(), $ticket->getSubject(), $ticket->isOverdue(), $ticket->getCreateDate());
+        return new TicketInfo($ticket->getId(), $ticket->getNumber(), $ticket->getStatusId(), $ticket->getSubject(), $ticket->isOverdue(), $ticket->getCreateDate(), $ticket->isAnswered());
     }
 
 }
@@ -28,16 +28,16 @@ class TicketInfo {
     var $subject;
     var $overdue;
     var $create_date;
+    var $is_answered;
 
-    function TicketInfo($id, $number, $status_id, $subject, $overdue, $create_date) {
+    function TicketInfo($id, $number, $status_id, $subject, $overdue, $create_date, $is_answered) {
         $this->id = $id;
         $this->number = $number;
         $this->status_id = $status_id;
         $this->subject = $subject;
         $this->overdue = $overdue;
         $this->create_date = $create_date;
+        $this->is_answered = $is_answered;
     }
-
-
 }
 ?>

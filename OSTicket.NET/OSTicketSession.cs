@@ -7,9 +7,9 @@ namespace OSTicket.NET {
 
         public OSTicketSession(string url, string apikey) {
             this._apikey = apikey;
-            if (url.EndsWith("/")) url = url.Substring(0, url.Length - 1);
+            if (url.EndsWith("/", StringComparison.Ordinal)) url = url.Substring(0, url.Length - 1);
             this._url = url;
-            this._https = this._url.StartsWith("https://");
+            this._https = this._url.StartsWith("https://", StringComparison.OrdinalIgnoreCase);
             this._valid_key = this.validateKey();
         }
 

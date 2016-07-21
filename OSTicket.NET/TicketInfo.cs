@@ -3,67 +3,77 @@ using Newtonsoft.Json;
 
 namespace OSTicket.NET {
     public class TicketInfo {
-        private string _id, _number, _status_id, _subject, _overdue, _create_date, _url;
+        public static readonly TicketStatus[] VALID_VALUES = { TicketStatus.OPEN, TicketStatus.RESOLVED, TicketStatus.CLOSED};
 
-        public TicketInfo() {
-            _id = "0";
-            _number = "0";
-            _status_id = "0";
-            _subject = "";
-            _overdue = "0";
-            _create_date = "";
-            _url = "#";
+        private int _id, _number;
+        private TicketStatus _status;
+        private string _subject;
+        private bool _overdue, _answered;
+        private DateTime _creation_date;
+        private Uri _url;
+
+        public TicketInfo(TicketInfoJson json) {
+            this._id = int.Parse(json.id);
+            this._number = int.Parse(json.number);
+            this._status = getStatusByNum(int.Parse(json.status_id) - 1);
+            this._subject = json.subject;
+            this._overdue = Convert.ToBoolean(int.Parse(json.overdue));
+            this._answered = Convert.ToBoolean(int.Parse(json.is_answered));
+            this._creation_date = Convert.ToDateTime(json.create_date);
+            this._url = new Uri(json.url);
         }
 
-        [JsonProperty(PropertyName = "id", Required = Required.Always)]
-        public string ID {
+        public int ID {
             get {
                 return _id;
             }
         }
 
-        [JsonProperty(PropertyName = "number", Required = Required.Always)]
-        public string Number {
+        public int Number {
             get {
                 return _number;
             }
         }
 
-        [JsonProperty(PropertyName = "status_id", Required = Required.Always)]
-        public string Status_ID {
+        public TicketStatus Status {
             get {
-                return _status_id;
+                return _status;
             }
         }
 
-        [JsonProperty(PropertyName = "subject", Required = Required.Always)]
         public string Subject {
             get {
                 return _subject;
             }
         }
 
-        [JsonProperty(PropertyName = "overdue", Required = Required.Always)]
-        public string Overdue {
+        public bool Overdue {
             get {
                 return _overdue;
             }
         }
 
-        [JsonProperty(PropertyName = "create_date", Required = Required.Always)]
-        public string Creation_Date {
+        public bool Answered {
             get {
-                return _create_date;
+                return _answered;
             }
         }
 
-        public string URL {
+        public DateTime CreationDate {
+            get {
+                return _creation_date;
+            }
+        }
+
+        public Uri URL {
             get {
                 return _url;
             }
-            set {
-                _url = value;
-            }
+        }
+
+        private static TicketStatus getStatusByNum(int i) {
+            if (i < 0 || i >= VALID_VALUES.Length) return TicketStatus.UNKNOWN;
+            return VALID_VALUES[i];
         }
     }
 }

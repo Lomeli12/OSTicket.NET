@@ -30,15 +30,15 @@ namespace OSTicket.NET {
         }
 
         public static TicketInfo postGetTicketInfo(string url, string apiKey, int id) {
-            var ticket_info = new TicketInfo();
+            var ticket_info = new TicketInfoJson();
             string apiURL = url + "/api/listtickets.php?id=" + id;
             var request = setupPostRequest(apiURL, apiKey);
             var response = (HttpWebResponse)request.GetResponse();
             var json_response = new StreamReader(response.GetResponseStream()).ReadToEnd();
             Console.WriteLine(json_response);
-            ticket_info = JsonConvert.DeserializeObject<TicketInfo>(json_response);
-            if (ticket_info != null) ticket_info.URL = url + "tickets.php?id=" + ticket_info.ID;
-            return ticket_info;
+            ticket_info = JsonConvert.DeserializeObject<TicketInfoJson>(json_response);
+            if (ticket_info != null) ticket_info.url = url + "/tickets.php?id=" + ticket_info.id;
+            return new TicketInfo(ticket_info);
         }
 
         private static HttpWebRequest setupPostRequest(string url, string apiKey) {
