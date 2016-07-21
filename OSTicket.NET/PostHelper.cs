@@ -34,7 +34,6 @@ namespace OSTicket.NET {
             var request = setupPostRequest(apiURL, apiKey);
             var response = (HttpWebResponse)request.GetResponse();
             var json_response = new StreamReader(response.GetResponseStream()).ReadToEnd();
-            Console.WriteLine(json_response);
             var ticket_info = JsonConvert.DeserializeObject<TicketInfoJson>(json_response);
             if (ticket_info != null) ticket_info.url = url + "/tickets.php?id=" + ticket_info.id;
             return new TicketInfo(ticket_info);
