@@ -18,7 +18,7 @@ namespace OSTicket.NET_Test {
                 Console.WriteLine("ANSWERED: " + info.Answered);
                 Console.WriteLine("CREATION_DATE: " + info.CreationDate);
                 Console.WriteLine("URL: " + info.URL);
-                Console.WriteLine("NUM_OF_RESPONSES: " + (info.Messages.Count - 1));
+                Console.WriteLine("NUM_OF_RESPONSES: " + info.Messages.Count);
                 if (info.OriginalMessage != null && info.OriginalMessage.MessageBody != null) {
                     Console.WriteLine("Original Message");
                     Console.WriteLine("Poster: " + info.OriginalMessage.Name);
