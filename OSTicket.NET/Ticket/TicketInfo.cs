@@ -102,6 +102,11 @@ namespace OSTicket.NET {
             }
         }
 
+        /// <summary>
+        /// Convert the status number recieved from OSTicket into a TicketStatus enum object
+        /// </summary>
+        /// <returns>The status by number.</returns>
+        /// <param name="i">The index.</param>
         private static TicketStatus getStatusByNum(int i) {
             if (i < 0 || i >= VALID_VALUES.Length) return TicketStatus.UNKNOWN;
             return VALID_VALUES[i];

@@ -7,6 +7,10 @@ namespace OSTicket.NET {
         private Body _body;
         private DateTime _created;
 
+        /// <summary>
+        /// Convert a MessageJson object to a more usable format with more usable members.
+        /// </summary>
+        /// <param name="json">Json.</param>
         public Message(MessageJson json) {
             this._id = int.Parse(json.id);
             this._user_id = int.Parse(json.user_id);

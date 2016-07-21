@@ -5,7 +5,7 @@ namespace OSTicket.NET {
         OPEN,
         RESOLVED,
         CLOSED,
-        UNKNOWN
+        UNKNOWN // Only used when a nonsensical number is recieved.
     }
 }
 
