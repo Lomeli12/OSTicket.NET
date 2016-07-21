@@ -18,7 +18,7 @@ namespace OSTicket.NET {
         /// </summary>
         /// <returns><c>true</c>, if key was validated, <c>false</c> otherwise.</returns>
         private bool validateKey() {
-            var response = PostHelper.postKey(URL, API_KEY);
+            var response = PostHelper.postKeyValidate(URL, API_KEY);
             return String.IsNullOrWhiteSpace(response);
         }
 

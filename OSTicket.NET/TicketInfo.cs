@@ -1,5 +1,4 @@
 ﻿using System;
-using Newtonsoft.Json;
 
 namespace OSTicket.NET {
     public class TicketInfo {
@@ -12,12 +11,16 @@ namespace OSTicket.NET {
         private DateTime _creation_date;
         private Uri _url;
 
+        /// <summary>
+        /// Converts TicketInfoJson to a more usable object with more usable members.
+        /// </summary>
+        /// <param name="json">Json.</param>
         public TicketInfo(TicketInfoJson json) {
             this._id = int.Parse(json.id);
             this._number = int.Parse(json.number);
             this._status = getStatusByNum(int.Parse(json.status_id) - 1);
             this._subject = json.subject;
-            this._staff_assigned = json.assignee.name;
+            this._staff_assigned = (json.assignee != null ? json.assignee.name : "Unassigned");
             this._overdue = Convert.ToBoolean(int.Parse(json.overdue));
             this._answered = Convert.ToBoolean(int.Parse(json.is_answered));
             this._creation_date = Convert.ToDateTime(json.create_date);

@@ -1,6 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
+// Just a median between the json and a usable object
 namespace OSTicket.NET {
     public class TicketInfoJson {
         public string id { get; set; }
