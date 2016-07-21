@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 // Just a median between the json and a usable object
@@ -21,6 +22,8 @@ namespace OSTicket.NET {
         public string url { get; set; }
 
         public Staff assignee { get; set; }
+
+        public List<MessageJson> messages { get; set; }
     }
 }
 

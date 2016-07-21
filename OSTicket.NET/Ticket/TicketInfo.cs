@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace OSTicket.NET {
     public class TicketInfo {
@@ -10,6 +11,8 @@ namespace OSTicket.NET {
         private bool _overdue, _answered;
         private DateTime _creation_date;
         private Uri _url;
+        private Message _original_message;
+        private List<Message> _messages;
 
         /// <summary>
         /// Converts TicketInfoJson to a more usable object with more usable members.
@@ -25,6 +28,12 @@ namespace OSTicket.NET {
             this._answered = Convert.ToBoolean(int.Parse(json.is_answered));
             this._creation_date = Convert.ToDateTime(json.create_date);
             this._url = new Uri(json.url);
+            this._messages = new List<Message>();
+            if (json.messages != null && json.messages.Count > 0) {
+                this._original_message = new Message(json.messages[0]);
+                json.messages.RemoveAt(0);
+                if (json.messages.Count > 0) foreach (MessageJson msgJson in json.messages) this._messages.Add(new Message(msgJson));
+            }
         }
 
         public int ID {
@@ -78,6 +87,18 @@ namespace OSTicket.NET {
         public Uri URL {
             get {
                 return _url;
+            }
+        }
+
+        public Message OriginalMessage {
+            get {
+                return _original_message;
+            }
+        }
+
+        public List<Message> Messages {
+            get {
+                return _messages;
             }
         }
 
