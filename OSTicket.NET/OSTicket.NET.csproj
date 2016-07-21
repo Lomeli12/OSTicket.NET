@@ -42,6 +42,7 @@
     <Compile Include="TicketInfo.cs" />
     <Compile Include="TicketInfoJson.cs" />
     <Compile Include="TicketStatus.cs" />
+    <Compile Include="Staff.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

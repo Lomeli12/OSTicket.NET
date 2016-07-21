@@ -12,6 +12,7 @@ namespace OSTicket.NET_Test {
                 Console.WriteLine("NUMBER: " + info.Number);
                 Console.WriteLine("STATUS_ID: " + info.Status);
                 Console.WriteLine("SUBJECT: " + info.Subject);
+                Console.WriteLine("ASSIGNED STAFF: " + info.AssignedStaff);
                 Console.WriteLine("OVERDUE: " + info.Overdue);
                 Console.WriteLine("ANSWERED: " + info.Answered);
                 Console.WriteLine("CREATION_DATE: " + info.CreationDate);

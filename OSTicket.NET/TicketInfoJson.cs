@@ -18,6 +18,8 @@ namespace OSTicket.NET {
         public string create_date { get; set; }
 
         public string url { get; set; }
+
+        public Staff assignee { get; set; }
     }
 }
 
