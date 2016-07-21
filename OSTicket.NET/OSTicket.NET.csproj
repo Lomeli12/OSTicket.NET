@@ -40,6 +40,8 @@
     <Compile Include="OSTicketSession.cs" />
     <Compile Include="Ticket.cs" />
     <Compile Include="TicketInfo.cs" />
+    <Compile Include="TicketInfoJson.cs" />
+    <Compile Include="TicketStatus.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
