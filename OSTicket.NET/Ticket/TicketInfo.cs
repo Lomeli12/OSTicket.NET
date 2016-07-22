@@ -30,9 +30,10 @@ namespace OSTicket.NET {
             this._url = new Uri(json.url);
             this._messages = new List<Message>();
             if (json.messages != null && json.messages.Count > 0) {
-                this._original_message = new Message(json.messages[0]);
-                json.messages.RemoveAt(0);
                 if (json.messages.Count > 0) foreach (MessageJson msgJson in json.messages) this._messages.Add(new Message(msgJson));
+                this._messages.Sort((x, y) => DateTime.Compare(x.CreationDate, y.CreationDate));
+                this._original_message = this._messages[0];
+                this._messages.RemoveAt(0);
             }
         }
 

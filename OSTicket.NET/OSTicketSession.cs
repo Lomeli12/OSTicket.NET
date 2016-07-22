@@ -24,8 +24,12 @@ namespace OSTicket.NET {
         /// </summary>
         /// <returns><c>true</c>, if key was validated, <c>false</c> otherwise.</returns>
         private bool validateKey() {
-            var response = PostHelper.postKeyValidate(URL, API_KEY);
-            return String.IsNullOrWhiteSpace(response);
+            try {
+                var response = PostHelper.postKeyValidate(URL, API_KEY);
+                return String.IsNullOrWhiteSpace(response);
+            } catch (Exception) {
+                return false;
+            }
         }
 
         /// <summary>
@@ -36,7 +40,11 @@ namespace OSTicket.NET {
         /// <param name="useHTTP">If set to <c>true</c> use /api/http.php/tickets.json instead of /api/tickets.json. Should be used if server does NOT have a SSL Certificate.</param>
         public string submitTicket(Ticket ticket, bool useHTTP) {
             if (!KEY_VALID || ticket == null) return null;
-            return PostHelper.postSubmitTicket(URL, ticket, API_KEY, useHTTP);
+            try {
+                return PostHelper.postSubmitTicket(URL, ticket, API_KEY, useHTTP);
+            } catch (Exception) {
+                return null;
+            }
         }
 
         public string submitTicket(Ticket ticket) {
@@ -50,7 +58,11 @@ namespace OSTicket.NET {
         /// <param name="id">Ticket id</param>
         public TicketInfo getTicketInfo(int id) {
             if (!KEY_VALID) return null;
-            return PostHelper.postGetTicketInfo(URL, API_KEY, id);
+            try {
+                return PostHelper.postGetTicketInfo(URL, API_KEY, id);
+            } catch (Exception) {
+                return null;
+            }
         }
 
         /// <summary>
