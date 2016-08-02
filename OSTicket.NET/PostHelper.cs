@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net;
+using System.Text;
 using Newtonsoft.Json;
 
 namespace OSTicket.NET {
@@ -28,13 +29,14 @@ namespace OSTicket.NET {
         /// <param name="url">URL.</param>
         /// <param name="ticket">Ticket.</param>
         /// <param name="apiKey">API key.</param>
-        /// <param name="useHTTP">If set to <c>true</c> use HTT.</param>
+        /// <param name="useHTTP">If set to <c>true</c> use HTTP instead of HTTPS.</param>
         public static string postSubmitTicket(string url, Ticket ticket, string apiKey, bool useHTTP) {
             string apiURL = url + (useHTTP ? "/api/http.php/tickets.json" : "/api/tickets.json");
             var request = setupPostRequest(apiURL, apiKey);
             request.ContentType = "application/json";
+            var content = JsonConvert.SerializeObject(ticket);
             using (var stream = new StreamWriter(request.GetRequestStream())) {
-                stream.Write(JsonConvert.SerializeObject(ticket));
+                stream.Write(content);
                 stream.Flush();
                 stream.Close();
             }

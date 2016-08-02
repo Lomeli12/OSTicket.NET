@@ -5,14 +5,14 @@ namespace OSTicket.NET {
     public class TicketInfo {
         public static readonly TicketStatus[] VALID_VALUES = { TicketStatus.OPEN, TicketStatus.RESOLVED, TicketStatus.CLOSED };
 
-        private int _id, _number;
-        private TicketStatus _status;
-        private string _subject, _staff_assigned;
-        private bool _overdue, _answered;
-        private DateTime _creation_date;
-        private Uri _url;
-        private Message _original_message;
-        private List<Message> _messages;
+        int _id, _number;
+        TicketStatus _status;
+        string _subject, _staff_assigned;
+        bool _overdue, _answered;
+        DateTime _creation_date;
+        Uri _url;
+        Message _original_message;
+        List<Message> _messages;
 
         /// <summary>
         /// Converts TicketInfoJson to a more usable object with more usable members.
@@ -35,6 +35,7 @@ namespace OSTicket.NET {
                 this._original_message = this._messages[0];
                 this._messages.RemoveAt(0);
             }
+            if (this.Status == TicketStatus.OPEN && this.Overdue) this._status = TicketStatus.OVERDUE;
         }
 
         public int ID {
@@ -108,7 +109,7 @@ namespace OSTicket.NET {
         /// </summary>
         /// <returns>The status by number.</returns>
         /// <param name="i">The index.</param>
-        private static TicketStatus getStatusByNum(int i) {
+        static TicketStatus getStatusByNum(int i) {
             if (i < 0 || i >= VALID_VALUES.Length) return TicketStatus.UNKNOWN;
             return VALID_VALUES[i];
         }
