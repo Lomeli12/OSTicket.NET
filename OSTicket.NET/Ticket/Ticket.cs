@@ -2,7 +2,7 @@
 
 namespace OSTicket.NET {
     public class Ticket {
-        private string _name, _email, _phone, _subject, _message;
+        string _name, _email, _phone, _subject, _message;
 
         public Ticket(string name, string email, string phone, string subject, string message) {
             this._name = name;

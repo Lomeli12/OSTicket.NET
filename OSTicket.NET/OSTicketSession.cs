@@ -2,8 +2,8 @@
 
 namespace OSTicket.NET {
     public class OSTicketSession {
-        private string _url, _apikey;
-        private bool _https, _valid_key;
+        string _url, _apikey;
+        bool _https, _valid_key;
 
         /// <summary>
         /// Creates a new session with OSTicket and validates key. If key is invalid,

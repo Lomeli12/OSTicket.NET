@@ -2,10 +2,10 @@
 
 namespace OSTicket.NET {
     public class Message {
-        private int _id, _user_id;
-        private string _poster, _source, _format, _name;
-        private Body _body;
-        private DateTime _created;
+        int _id, _user_id;
+        string _poster, _source, _format, _name;
+        Body _body;
+        DateTime _created;
 
         /// <summary>
         /// Convert a MessageJson object to a more usable format with more usable members.

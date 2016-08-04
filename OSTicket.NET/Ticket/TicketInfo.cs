@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace OSTicket.NET {
     public class TicketInfo {
-        public static readonly TicketStatus[] VALID_VALUES = { TicketStatus.OPEN, TicketStatus.RESOLVED, TicketStatus.CLOSED };
+        static readonly TicketStatus[] VALID_VALUES = { TicketStatus.OPEN, TicketStatus.RESOLVED, TicketStatus.CLOSED };
 
         int _id, _number;
         TicketStatus _status;
@@ -110,8 +110,12 @@ namespace OSTicket.NET {
         /// <returns>The status by number.</returns>
         /// <param name="i">The index.</param>
         static TicketStatus getStatusByNum(int i) {
-            if (i < 0 || i >= VALID_VALUES.Length) return TicketStatus.UNKNOWN;
-            return VALID_VALUES[i];
+            if (i < 0 || i >= validValues().Length) return TicketStatus.UNKNOWN;
+            return validValues()[i];
+        }
+
+        public static TicketStatus[] validValues() {
+            return (TicketStatus[])VALID_VALUES.Clone();
         }
     }
 }

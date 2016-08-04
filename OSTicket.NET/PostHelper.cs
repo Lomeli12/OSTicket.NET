@@ -1,12 +1,11 @@
 ﻿using System;
 using System.IO;
 using System.Net;
-using System.Text;
 using Newtonsoft.Json;
 
 namespace OSTicket.NET {
     public class PostHelper {
-        private PostHelper() {
+        PostHelper() {
         }
 
         /// <summary>
@@ -31,17 +30,20 @@ namespace OSTicket.NET {
         /// <param name="apiKey">API key.</param>
         /// <param name="useHTTP">If set to <c>true</c> use HTTP instead of HTTPS.</param>
         public static string postSubmitTicket(string url, Ticket ticket, string apiKey, bool useHTTP) {
-            string apiURL = url + (useHTTP ? "/api/http.php/tickets.json" : "/api/tickets.json");
-            var request = setupPostRequest(apiURL, apiKey);
-            request.ContentType = "application/json";
             var content = JsonConvert.SerializeObject(ticket);
-            using (var stream = new StreamWriter(request.GetRequestStream())) {
-                stream.Write(content);
-                stream.Flush();
-                stream.Close();
+            if (!string.IsNullOrWhiteSpace(content)) {
+                string apiURL = url + (useHTTP ? "/api/http.php/tickets.json" : "/api/tickets.json");
+                var request = setupPostRequest(apiURL, apiKey);
+                request.ContentType = "application/json";
+                using (var stream = new StreamWriter(request.GetRequestStream())) {
+                    stream.Write(content);
+                    stream.Flush();
+                    stream.Close();
+                }
+                var response = (HttpWebResponse)request.GetResponse();
+                return new StreamReader(response.GetResponseStream()).ReadToEnd();
             }
-            var response = (HttpWebResponse)request.GetResponse();
-            return new StreamReader(response.GetResponseStream()).ReadToEnd();
+            return null;
         }
 
         /// <summary>
@@ -57,7 +59,7 @@ namespace OSTicket.NET {
             var response = (HttpWebResponse)request.GetResponse();
             var json_response = new StreamReader(response.GetResponseStream()).ReadToEnd();
             var ticket_info = JsonConvert.DeserializeObject<TicketInfoJson>(json_response);
-            if (ticket_info != null) ticket_info.url = url + "/tickets.php?id=" + ticket_info.id;
+            if (ticket_info != null) ticket_info.url = string.Format("{0}/tickets.php?id={1}", url, ticket_info.id);
             return new TicketInfo(ticket_info);
         }
 
